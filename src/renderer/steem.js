@@ -17,18 +17,23 @@ function init (authors, percentage) {
     console.log(op[1])
     try {
       var magnet = JSON.parse(op[1].json_metadata).video.content.magnet
-      if (authors && authors.indexOf(op[1].author) > -1) {
-        window.dispatch('addTorrent', magnet)
-        console.log('Added torrent from authors')
-        return
-      }
-      if (percentage && percentage > Math.random()) {
-        window.dispatch('addTorrent', magnet)
-        console.log('Added torrent from random percentage')
-        return
+      console.log(magnet)
+      if (magnet) {
+        if (authors && authors.indexOf(op[1].author) > -1) {
+          window.dispatch('addTorrent', magnet)
+          console.log('Added torrent from authors')
+          return
+        }
+        if (percentage && percentage > Math.random()) {
+          window.dispatch('addTorrent', magnet)
+          console.log('Added torrent from random percentage')
+          return
+        }
+        console.log('ignored torrent')
+      } else {
+        console.log('ignored video (no magnet)')
       }
 
-      console.log('ignored torrent')
     } catch (e) {
       console.log(e)
     }

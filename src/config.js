@@ -35,35 +35,15 @@ module.exports = {
 
   DEFAULT_TORRENTS: [
     {
-      testID: 'bbb',
-      name: 'Big Buck Bunny',
-      posterFileName: 'bigBuckBunny.jpg',
-      torrentFileName: 'bigBuckBunny.torrent'
+      testID: 'terry',
+      name: 'DTube Version 0.2 - Interview with Creator Adrien',
+      torrentFileName: 'DTube Version 0.2 - Interview with Creator Adrien.torrent'
     },
     {
-      testID: 'cosmos',
-      name: 'Cosmos Laundromat (Preview)',
-      posterFileName: 'cosmosLaundromat.jpg',
-      torrentFileName: 'cosmosLaundromat.torrent'
+      testID: 'jerry',
+      name: 'Upload any video to DTube and watch with no ads!',
+      torrentFileName: 'Upload any video to DTube and watch with no ads!.torrent'
     },
-    {
-      testID: 'sintel',
-      name: 'Sintel',
-      posterFileName: 'sintel.jpg',
-      torrentFileName: 'sintel.torrent'
-    },
-    {
-      testID: 'tears',
-      name: 'Tears of Steel',
-      posterFileName: 'tearsOfSteel.jpg',
-      torrentFileName: 'tearsOfSteel.torrent'
-    },
-    {
-      testID: 'wired',
-      name: 'The WIRED CD - Rip. Sample. Mash. Share',
-      posterFileName: 'wiredCd.jpg',
-      torrentFileName: 'wiredCd.torrent'
-    }
   ],
 
   DELAYED_INIT: 3000 /* 3 seconds */,
