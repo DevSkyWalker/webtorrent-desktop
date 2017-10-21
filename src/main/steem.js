@@ -18,13 +18,12 @@ function init (authors, percentage) {
     console.log(op[1])
     try {
       var magnet = JSON.parse(op[1].json_metadata).video.content.magnet
-      if (authors.indexOf(op[1].author) > -1) {
+      if (authors && authors.indexOf(op[1].author) > -1) {
         windows.main.dispatch('addTorrent', magnet)
         console.log('Added torrent from authors')
         return
       }
-      var random = Math.random();
-      if (random < percentage) {
+      if (percentage && percentage > Math.random()) {
         windows.main.dispatch('addTorrent', magnet)
         console.log('Added torrent from random percentage')
         return
