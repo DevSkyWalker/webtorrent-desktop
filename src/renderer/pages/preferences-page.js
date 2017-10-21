@@ -3,7 +3,9 @@ const React = require('react')
 
 const colors = require('material-ui/styles/colors')
 const Checkbox = require('material-ui/Checkbox').default
+const Slider = require('material-ui/Slider').default
 const RaisedButton = require('material-ui/RaisedButton').default
+const TextField = require('material-ui/TextField').default
 const Heading = require('../components/heading')
 const PathSelector = require('../components/path-selector')
 
@@ -25,6 +27,15 @@ class PreferencesPage extends React.Component {
 
     this.handleStartupChange =
       this.handleStartupChange.bind(this)
+
+    this.handleSteemChange =
+      this.handleSteemChange.bind(this)
+
+    this.handleSteemPercentageChange =
+      this.handleSteemPercentageChange.bind(this)
+
+    this.handleSteemAuthorsChange =
+      this.handleSteemAuthorsChange.bind(this)
   }
 
   downloadPathSelector () {
@@ -204,6 +215,50 @@ class PreferencesPage extends React.Component {
     )
   }
 
+  handleSteemChange (e, isChecked) {
+    dispatch('updatePreferences', 'steem', isChecked)
+  }
+
+  handleSteemPercentageChange (e, value) {
+    dispatch('updatePreferences', 'steempercentage', value/100)
+  }
+
+  handleSteemAuthorsChange (e, value) {
+    var authors = value.split(',')
+    for (var i = 0; i < authors.length; i++) {
+      authors[i] = authors[i].trim()
+    }
+    dispatch('updatePreferences', 'steemauthors', authors)
+  }
+
+  setSteemCheckbox () {
+    return (
+      <Preference>
+        <Checkbox
+          className='control'
+          checked={this.props.state.unsaved.prefs.steem}
+          label={'Automatically download and seed videos from the STEEM Blockchain.'}
+          onCheck={this.handleSteemChange}
+        />
+        <p>Percentage of STEEM Videos to Seed.</p>
+        <Slider
+          min={0}
+          max={100}
+          step={1}
+          onChange={this.handleSteemPercentageChange}
+          value={this.props.state.unsaved.prefs.steempercentage ? this.props.state.unsaved.prefs.steempercentage*100 : 10}
+          defaultValue='10'
+        />
+        <p>Authors that you will always seed (comma separated)</p>
+        <TextField
+          onChange={this.handleSteemAuthorsChange}
+          value={this.props.state.unsaved.prefs.steemauthors ? this.props.state.unsaved.prefs.steemauthors.join(', ') : ''}
+          defaultValue='dtube, heimindanger, steeminator3000, superkoala, hightouch'
+        />
+      </Preference>
+    )
+  }
+
   handleSetDefaultApp () {
     dispatch('updatePreferences', 'isFileHandler', true)
   }
@@ -230,6 +285,9 @@ class PreferencesPage extends React.Component {
           {this.setDefaultAppButton()}
         </PreferencesSection>
         {this.setStartupSection()}
+        <PreferencesSection title='Blockchain'>
+          {this.setSteemCheckbox()}
+        </PreferencesSection>
       </div>
     )
   }
