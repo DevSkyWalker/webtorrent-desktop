@@ -33,18 +33,7 @@ module.exports = {
 
   CONFIG_PATH: getConfigPath(),
 
-  DEFAULT_TORRENTS: [
-    {
-      testID: 'terry',
-      name: 'DTube Version 0.2 - Interview with Creator Adrien',
-      torrentFileName: 'DTube Version 0.2 - Interview with Creator Adrien.torrent'
-    },
-    {
-      testID: 'jerry',
-      name: 'Upload any video to DTube and watch with no ads!',
-      torrentFileName: 'Upload any video to DTube and watch with no ads!.torrent'
-    },
-  ],
+  DEFAULT_TORRENTS: [],
 
   DELAYED_INIT: 3000 /* 3 seconds */,
 
