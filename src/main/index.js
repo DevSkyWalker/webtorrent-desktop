@@ -132,13 +132,10 @@ function delayedInit (state) {
   const updater = require('./updater')
   const FolderWatcher = require('./folder-watcher')
   const folderWatcher = new FolderWatcher({window: windows.main, state})
-  const steemSeeder = require('./steem')
 
   announcement.init()
   dock.init()
   updater.init()
-  if (state.saved.prefs.steem)
-    steemSeeder.init(state.saved.prefs.steemauthors, state.saved.prefs.steempercentage)
 
   ipc.setModule('folderWatcher', folderWatcher)
   if (folderWatcher.isEnabled()) {

@@ -35,6 +35,7 @@ const config = require('../config')
 const telemetry = require('./lib/telemetry')
 const sound = require('./lib/sound')
 const TorrentPlayer = require('./lib/torrent-player')
+const steem = require('./steem')
 
 // Perf optimization: Needed immediately, so do not lazy load it below
 const TorrentListController = require('./controllers/torrent-list-controller')
@@ -180,6 +181,9 @@ function onState (err, _state) {
 // Runs a few seconds after the app loads, to avoid slowing down startup time
 function delayedInit () {
   telemetry.send(state)
+
+  if (state.saved.prefs.steem)
+    steem.init(state.saved.prefs.steemauthors, state.saved.prefs.steempercentage)
 
   // Send telemetry data every 12 hours, for users who keep the app running
   // for extended periods of time
