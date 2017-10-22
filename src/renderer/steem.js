@@ -16,9 +16,9 @@ function init (authors, percentage) {
 
     console.log(op[1])
     try {
-      var magnet = JSON.parse(op[1].json_metadata).video.content.magnet
-      console.log(magnet)
-      if (magnet) {
+      var a = JSON.parse(op[1].json_metadata)
+      if (a && a.video && a.video.content && a.video.content.magnet) {
+        var magnet = a.video.content.magnet
         if (authors && authors.indexOf(op[1].author) > -1) {
           window.dispatch('addTorrent', magnet)
           console.log('Added torrent from authors')
@@ -33,7 +33,6 @@ function init (authors, percentage) {
       } else {
         console.log('ignored video (no magnet)')
       }
-
     } catch (e) {
       console.log(e)
     }
